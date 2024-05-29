@@ -41,6 +41,7 @@ Route::middleware('auth:sanctum')->group(function(){
 //Главная страница с компаними
 Route::get('/all/rituals', [PostRitualController::class, 'get_ritual']);
 Route::post('/send/{id}', [SendNotificationController::class, 'sendTelegram']);
+Route::post('/rituals', [PostRitualController::class, 'post_ritual']);
 Route::post('/question', [SendNotificationController::class, 'sendTelegramQuestions']);
 Route::middleware('api-session')->group(function () {
     Route::post('/rating/{id}', [RatingController::class, 'post_rate']);
