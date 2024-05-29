@@ -100,7 +100,7 @@ public function post_ritual(Request $request)
             foreach ($files as $file)
             {
                 $path = Storage::disk('ritual')->putFile('file', $file);
-                $fullPath = "http://localhost:8000/ritual/" . $path;
+                $fullPath = "https://cz19567.tw1.ru/ritual/" . $path;
                 $paths[] = $fullPath;
                 $fileArr[] = $file->getClientOriginalName();
             }
@@ -138,7 +138,7 @@ public function post_ritual(Request $request)
  *                 @OA\Property(property="service_ritual", type="string", description="The services offered by the ritual company"),
  *                 @OA\Property(property="site_ritual", type="string", description="The website of the ritual company"),
  *                 @OA\Property(property="social_network_ritual", type="string", description="The social media links of the ritual company"),
- *                 @OA\Property(property="paths", type="string", description="The path to the ritual details page", example="http://localhost:8000/ritual/Ритуал.jpg"),
+ *                 @OA\Property(property="paths", type="string", description="The path to the ritual details page", example="https://cz19567.tw1.ru/ritual/Ритуал.jpg"),
  *                 @OA\Property(property="files", type="array", @OA\Items(type="string"), description="The files associated with the ritual"),
  *                 @OA\Property(property="average_rating", type="number", description="The average rating of the ritual"),
  *                 @OA\Property(property="total_rating_requests", type="integer", description="The total number of rating requests for the ritual"),
@@ -148,9 +148,9 @@ public function post_ritual(Request $request)
  *                 @OA\Property(property="ratings", type="integer", description="кто какой рейтинг поставил"),
  *                 @OA\Property(property="min_rating", type="integer", description="minimum rating"),
  *                 @OA\Property(property="max_rating", type="integer", description="max rating"),
- *                 @OA\Property(property="sort_by_rating", type="boolean", description="сортировка по среднему рейтингу", example="http://localhost:8000/api/all/rituals?sort_by_rating=true" ),
- *                 @OA\Property(property="sort_by_prices", type="boolean", description="сортировка по цене", example="http://localhost:8000/api/all/rituals?sort_by_prices=true" ),
- *                 @OA\Property(property="sort_by_prices&sort_by_rating", type="boolean", description="сортировка по цене и рейтингу", example="http://localhost:8000/api/all/rituals?sort_by_prices=true&sort_by_rating=true" )
+ *                 @OA\Property(property="sort_by_rating", type="boolean", description="сортировка по среднему рейтингу", example="https://cz19567.tw1.ru/api/all/rituals?sort_by_rating=true" ),
+ *                 @OA\Property(property="sort_by_prices", type="boolean", description="сортировка по цене", example="https://cz19567.tw1.ru/api/all/rituals?sort_by_prices=true" ),
+ *                 @OA\Property(property="sort_by_prices&sort_by_rating", type="boolean", description="сортировка по цене и рейтингу", example="https://cz19567.tw1.ru/api/all/rituals?sort_by_prices=true&sort_by_rating=true" )
  *              )
  *         )
  *     )
@@ -236,7 +236,7 @@ public function post_ritual(Request $request)
         $files = explode(',', $ritual->files);
 
         foreach ($paths as $path) {
-            Storage::disk('ritual')->delete(str_replace('http://localhost:8000/ritual/', '', $path));
+            Storage::disk('ritual')->delete(str_replace('https://cz19567.tw1.ru/ritual/', '', $path));
         }
 
         // Удаляем запись из базы данных
@@ -370,7 +370,7 @@ public function post_ritual(Request $request)
             // Upload new files
             foreach ($files as $file) {
                 $path = Storage::disk('ritual')->putFile('file', $file);
-                $fullPath = "http://localhost:8000/ritual/" . $path;
+                $fullPath = "https://cz19567.tw1.ru/" . $path;
                 $paths[] = $fullPath;
                 $fileArr[] = $file->getClientOriginalName();
             }
@@ -392,11 +392,11 @@ public function post_ritual(Request $request)
         $files = explode(',', $ritual->files);
 
         foreach ($paths as $path) {
-            Storage::disk('ritual')->delete(str_replace('http://localhost:8000/ritual/', '', $path));
+            Storage::disk('ritual')->delete(str_replace('https://cz19567.tw1.ru/', '', $path));
         }
 
         foreach ($files as $file) {
-            Storage::disk('ritual')->delete(str_replace('http://localhost:8000/ritual/', '', $file));
+            Storage::disk('ritual')->delete(str_replace('https://cz19567.tw1.ru/', '', $file));
         }
 
         // Очищаем значения полей path и files
