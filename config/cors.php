@@ -17,7 +17,7 @@ return [
 
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
-    'allowed_origins' => ['http://localhost:3000', 'https://www.ritualcompass.com/'],
+    'allowed_origins' => ['https://www.ritualcompass.com'],
 
     'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE'],
 
