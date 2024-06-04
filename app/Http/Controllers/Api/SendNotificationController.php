@@ -192,6 +192,52 @@ class SendNotificationController extends Controller
         return response()->json(['message' => 'Заявка успешно отправленна'], 200);
     }
 
+     /**
+ * @OA\Post(
+ *     path="/api/phone/{id}",
+ *     summary="Отправка уведомления о звонке в телеграмм",
+ *     description="Отправка уведомления",
+ *     tags={"Главная страница"},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="integer"
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Successful response",
+ *         @OA\JsonContent(
+ *             @OA\Property(
+ *                 property="message",
+ *                 type="string",
+ *                 example="Заявка успешно отправленна."
+ *             )
+ *         )
+ *     )
+ *
+ * )
+ */
+
+    public function sendPhone(Request $request, $id)
+    {
+        $company = Ritual::find($id);
+        $companyName = $company ? $company->company_ritual : 'Неизвестно';
+
+
+                $PhoneMessage = "📞 Звонок!\n\n"
+                . "🏢 Компания: *$companyName*";
+
+
+        $this->sendTelegramPhone($PhoneMessage);
+
+        $telegram->save();
+
+        return response()->json(['message' => 'Заявка успешно отправленна'], 200);
+    }
+
     private function sendTelegramMessage($formattedMessage)
     {
         $botToken = config('secret.telegram.bot_token');
@@ -222,6 +268,24 @@ class SendNotificationController extends Controller
         $data = [
             'chat_id' => $chatId,
             'text' => $QuestionMessage,
+            'parse_mode' => 'Markdown',
+        ];
+
+        Http::post($url, $data);
+    }
+
+    private function sendTelegramPhone($PhoneMessage)
+    {
+        $botToken = config('secret.telegram.bot_token');
+        $chatId = config('secret.telegram.chat_id');
+
+        $url = "https://api.telegram.org/bot$botToken/sendMessage";
+
+
+
+        $data = [
+            'chat_id' => $chatId,
+            'text' => $PhoneMessage,
             'parse_mode' => 'Markdown',
         ];
 
