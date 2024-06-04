@@ -233,7 +233,7 @@ class SendNotificationController extends Controller
 
         $this->sendTelegramPhone($PhoneMessage);
 
-        $telegram->save();
+        
 
         return response()->json(['message' => 'Заявка успешно отправленна'], 200);
     }
