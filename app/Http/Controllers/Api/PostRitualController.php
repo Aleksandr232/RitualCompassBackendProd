@@ -166,6 +166,10 @@ public function post_ritual(Request $request)
             $data = collect($rituals)->sortByDesc('prices');
         } elseif ($request->boolean('sort_by_positive_reviews')) {
             $data = collect($rituals)->sortByDesc('max_rating');
+        }else if ($request->boolean('sort_by_count_order')) {
+            $data = collect($rituals)->sortByDesc('count_order');
+        }else if ($request->boolean('sort_by_count_call')) {
+            $data = collect($rituals)->sortByDesc('count_call');
         } else {
             $data = collect($rituals);
         }
