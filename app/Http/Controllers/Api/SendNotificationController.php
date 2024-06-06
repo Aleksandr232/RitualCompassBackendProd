@@ -85,6 +85,8 @@ class SendNotificationController extends Controller
 
         $company->increment('count_order');
 
+        $company->save();
+
         return response()->json(['message' => 'Заявка успешно отправленна'], 200);
     }
 
@@ -236,6 +238,8 @@ class SendNotificationController extends Controller
         $this->sendTelegramPhone($PhoneMessage);
 
         $company->increment('count_call');
+
+        $company->save();
 
         return response()->json(['message' => 'Заявка успешно отправленна'], 200);
     }
