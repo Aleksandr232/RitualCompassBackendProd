@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\PostRitualController;
 use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\SendNotificationController;
 use App\Http\Controllers\Api\StatisticController;
+use App\Http\Controllers\Api\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,8 @@ Route::middleware('auth:sanctum')->group(function(){
             Route::delete('/rituals/delete/{id}', [PostRitualController::class, 'delete_ritual']);
             Route::post('/rituals/{id}', [PostRitualController::class, 'update_ritual']);
             Route::get('/clients/count', [StatisticController::class, 'getClientCountByRitualCompany']);
+            Route::post('/about', [AboutController::class, 'post_about']);
+            Route::get('/about', [AboutController::class, 'get_about']);
         });
 });
 
@@ -44,6 +47,7 @@ Route::post('/send/{id}', [SendNotificationController::class, 'sendTelegram']);
 Route::post('/phone/{id}', [SendNotificationController::class, 'sendPhone']);
 Route::post('/rituals', [PostRitualController::class, 'post_ritual']);
 Route::post('/question', [SendNotificationController::class, 'sendTelegramQuestions']);
+Route::get('/about', [AboutController::class, 'get_about']);
 Route::middleware('api-session')->group(function () {
     Route::post('/rating/{id}', [RatingController::class, 'post_rate']);
 });
