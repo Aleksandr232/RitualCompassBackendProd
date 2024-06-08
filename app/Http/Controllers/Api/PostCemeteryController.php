@@ -112,8 +112,8 @@ class PostCemeteryController extends Controller
  *                 @OA\Property(
  *                 property="coordinates",
  *                 type="object",
- *                 @OA\Property(property="latitude", type="float"),
- *                 @OA\Property(property="longitude", type="float")
+ *                 @OA\Property(property="latitude", type="string"),
+ *                 @OA\Property(property="longitude", type="string")
  *                  )
  *              )
  *         )
