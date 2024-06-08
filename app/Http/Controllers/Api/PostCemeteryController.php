@@ -72,7 +72,7 @@ class PostCemeteryController extends Controller
             'seo_title' => $request -> seo_title,
             'seo_description' => $request -> seo_description,
             'seo_keywords' => $request -> seo_keywords,
-            'coordinates' => implode(',', $request->coordinates)
+            'coordinates' => is_array($request->coordinates) ? implode(',', $request->coordinates) : $request->coordinates
         ]);
 
         if ($request->hasFile('files')) {
