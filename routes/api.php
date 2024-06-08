@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\SendNotificationController;
 use App\Http\Controllers\Api\StatisticController;
 use App\Http\Controllers\Api\AboutController;
+use App\Http\Controllers\Api\PostCemeteryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,8 @@ Route::middleware('auth:sanctum')->group(function(){
             Route::get('/clients/count', [StatisticController::class, 'getClientCountByRitualCompany']);
             Route::post('/about', [AboutController::class, 'post_about']);
             Route::get('/about', [AboutController::class, 'get_about']);
+            Route::post('/cemetery', [PostCemeteryController::class, 'post_cemetery']);
+            Route::get('/cemetery', [PostCemeteryController::class, 'get_cemetery']);
         });
 });
 
@@ -48,6 +51,7 @@ Route::post('/phone/{id}', [SendNotificationController::class, 'sendPhone']);
 Route::post('/rituals', [PostRitualController::class, 'post_ritual']);
 Route::post('/question', [SendNotificationController::class, 'sendTelegramQuestions']);
 Route::get('/about', [AboutController::class, 'get_about']);
+Route::get('/cemetery', [PostCemeteryController::class, 'get_cemetery']);
 Route::middleware('api-session')->group(function () {
     Route::post('/rating/{id}', [RatingController::class, 'post_rate']);
 });
