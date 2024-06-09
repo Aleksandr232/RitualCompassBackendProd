@@ -149,4 +149,33 @@ class PostCemeteryController extends Controller
 
         return response()->json($data);
     }
+
+    public function get_cemetery_slug($slug)
+    {
+        $cemetery = Cemetery::where('slug', $slug)->first();
+
+        if (!$cemetery) {
+            return response()->json(['error' => 'Cemetery not found'], 404);
+        }
+
+        $coordinates = explode(',', $cemetery->coordinates);
+
+        $data = [
+            'id' => $cemetery->id,
+            'title' => $cemetery->title,
+            'description' => $cemetery->description,
+            'slug' => $cemetery->slug,
+            'files' => $cemetery->files,
+            'paths' => 'https://cz19567.tw1.ru/ritual/' . $cemetery->paths,
+            'seo_title' => $cemetery->seo_title,
+            'seo_description' => $cemetery->seo_description,
+            'seo_keywords' => $cemetery->seo_keywords,
+            'coordinates' => [
+                'latitude' => trim($coordinates[0]),
+                'longitude' => trim($coordinates[1])
+            ]
+        ];
+
+        return response()->json($data);
+    }
 }

@@ -53,6 +53,7 @@ Route::post('/question', [SendNotificationController::class, 'sendTelegramQuesti
 Route::get('/about', [AboutController::class, 'get_about']);
 Route::get('/about/{slug}', [AboutController::class, 'get_about_slug']);
 Route::get('/cemetery', [PostCemeteryController::class, 'get_cemetery']);
+Route::get('/cemetery/{slug}', [PostCemeteryController::class, 'get_cemetery_slug']);
 Route::middleware('api-session')->group(function () {
     Route::post('/rating/{id}', [RatingController::class, 'post_rate']);
 });
