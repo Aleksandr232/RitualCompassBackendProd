@@ -113,4 +113,23 @@ class AboutController extends Controller
     }
     return response()->json($data);
    }
+
+   public function get_about_slug($slug)
+    {
+        $about = About::where('slug', $slug)->first();
+        
+        if ($about) {
+            return response()->json([
+                'id' => $about->id,
+                'title' => $about->title,
+                'description' => $about->description,
+                'slug' => $about->slug,
+                'seo_title' => $about->seo_title,
+                'seo_description' => $about->seo_description,
+                'seo_keywords' => $about->seo_keywords
+            ]);
+        } else {
+            return response()->json(['error' => 'Информация о том, что не найдено'], 404);
+        }
+    }
 }
