@@ -66,6 +66,12 @@ class PostCemeteryController extends Controller
  * )
  */
     public function post_cemetery(Request $request){
+        $description = explode('.', $request->description);
+        $description = array_map(function($item) {
+            return trim($item) . '.';
+        }, $description);
+    $description = implode("\n", $description);
+
         $cemetery = new Cemetery([
             'title' => $request -> title,
             'description' => $request -> description,
@@ -129,11 +135,17 @@ class PostCemeteryController extends Controller
 
         foreach ($cemeterys as $cemetery) {
             $coordinates = explode(',', $cemetery->coordinates);
+            $description_sentences = explode('.', $cemetery->description);
+
+            $description_array = [];
+            foreach ($description_sentences as $sentence) {
+                $description_array[] = trim($sentence) . '.';
+            }
 
             $data[] = [
             'id' => $cemetery -> id,
             'title' => $cemetery -> title,
-            'description' => $cemetery -> description,
+            'description' => $description_array,
             'slug' => $cemetery -> slug,
             'files' => $cemetery -> files,
             'paths' => 'https://cz19567.tw1.ru/ritual/' .  $cemetery -> paths,
@@ -159,11 +171,17 @@ class PostCemeteryController extends Controller
         }
 
         $coordinates = explode(',', $cemetery->coordinates);
+        $description_sentences = explode('.', $cemetery->description);
+
+        $description_array = [];
+        foreach ($description_sentences as $sentence) {
+            $description_array[] = trim($sentence) . '.';
+        }
 
         $data = [
             'id' => $cemetery->id,
             'title' => $cemetery->title,
-            'description' => $cemetery->description,
+            'description' => $description_array,
             'slug' => $cemetery->slug,
             'files' => $cemetery->files,
             'paths' => 'https://cz19567.tw1.ru/ritual/' . $cemetery->paths,
