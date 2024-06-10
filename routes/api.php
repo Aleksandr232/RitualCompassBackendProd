@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\SendNotificationController;
 use App\Http\Controllers\Api\StatisticController;
 use App\Http\Controllers\Api\AboutController;
 use App\Http\Controllers\Api\PostCemeteryController;
+use App\Http\Controllers\Api\PostMorgueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,8 @@ Route::middleware('auth:sanctum')->group(function(){
             Route::get('/about', [AboutController::class, 'get_about']);
             Route::post('/cemetery', [PostCemeteryController::class, 'post_cemetery']);
             Route::get('/cemetery', [PostCemeteryController::class, 'get_cemetery']);
+            Route::post('/morgue', [PostMorgueController::class, 'post_morgue']);
+            Route::get('/morgue', [PostMorgueController::class, 'get_morgue']);
         });
 });
 
@@ -54,6 +57,7 @@ Route::get('/about', [AboutController::class, 'get_about']);
 Route::get('/about/{slug}', [AboutController::class, 'get_about_slug']);
 Route::get('/cemetery', [PostCemeteryController::class, 'get_cemetery']);
 Route::get('/cemetery/{slug}', [PostCemeteryController::class, 'get_cemetery_slug']);
+Route::get('/morgue/{slug}', [PostMorgueController::class, 'get_morgue_slug']);
 Route::middleware('api-session')->group(function () {
     Route::post('/rating/{id}', [RatingController::class, 'post_rate']);
 });
