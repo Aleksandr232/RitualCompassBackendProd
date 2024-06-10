@@ -65,9 +65,15 @@ class PostMorgueController extends Controller
  * )
  */
 public function post_morgue(Request $request){
+        $description = explode('.', $request->description);
+        $description = array_map(function($item) {
+            return trim($item) . '.';
+        }, $description);
+        $description = implode("\n", $description);
+
     $morgue = new Morgue([
         'title' => $request -> title,
-        'description' => $request -> description,
+        'description' =>$description,
         'slug' => $request -> slug,
         'seo_title' => $request -> seo_title,
         'seo_description' => $request -> seo_description,
@@ -128,11 +134,12 @@ public function get_morgue(){
 
     foreach ($morgues as $morgue) {
         $coordinates = explode(',', $morgue->coordinates);
+        $description_sentences = preg_split('/[.!?]+/', $morgue->description, -1, PREG_SPLIT_NO_EMPTY);
 
         $data[] = [
         'id' => $morgue -> id,
         'title' => $morgue -> title,
-        'description' => $morgue -> description,
+        'description' => $description_sentences,
         'slug' => $morgue -> slug,
         'files' => $morgue -> files,
         'paths' => 'https://cz19567.tw1.ru/ritual/' .  $morgue -> paths,
@@ -158,11 +165,12 @@ public function get_morgue_slug($slug)
     }
 
     $coordinates = explode(',', $morgue->coordinates);
+    $description_sentences = preg_split('/[.!?]+/', $morgue->description, -1, PREG_SPLIT_NO_EMPTY);
 
     $data = [
         'id' => $morgue->id,
         'title' => $morgue->title,
-        'description' => $morgue->description,
+        'description' => $description_sentences,
         'slug' => $morgue->slug,
         'files' => $morgue->files,
         'paths' => 'https://cz19567.tw1.ru/ritual/' . $morgue->paths,

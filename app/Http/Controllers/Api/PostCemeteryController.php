@@ -70,11 +70,11 @@ class PostCemeteryController extends Controller
         $description = array_map(function($item) {
             return trim($item) . '.';
         }, $description);
-    $description = implode("\n", $description);
+        $description = implode("\n", $description);
 
         $cemetery = new Cemetery([
             'title' => $request -> title,
-            'description' => $request -> description,
+            'description' =>$description,
             'slug' => $request -> slug,
             'seo_title' => $request -> seo_title,
             'seo_description' => $request -> seo_description,

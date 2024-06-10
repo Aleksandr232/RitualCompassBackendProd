@@ -57,10 +57,15 @@ class AboutController extends Controller
  */
 
    public function post_about(Request $request){
+    $description = explode('.', $request->description);
+        $description = array_map(function($item) {
+            return trim($item) . '.';
+        }, $description);
+        $description = implode("\n", $description);
 
     $about = new About([
         'title' => $request -> title,
-        'description' => $request -> description,
+        'description' =>$description,
         'slug' => $request -> slug,
         'seo_title' => $request -> seo_title,
         'seo_description' => $request -> seo_description,
@@ -101,10 +106,11 @@ class AboutController extends Controller
     $abouts = About::all();
     $data = [];
     foreach ($abouts as $about) {
+        $description_sentences = preg_split('/[.!?]+/', $about->description, -1, PREG_SPLIT_NO_EMPTY);
         $data[] = [
         'id' => $about -> id,
         'title' => $about -> title,
-        'description' => $about -> description,
+        'description' => $description_sentences,
         'slug' => $about -> slug,
         'seo_title' => $about -> seo_title,
         'seo_description' => $about -> seo_description,
@@ -117,12 +123,13 @@ class AboutController extends Controller
    public function get_about_slug($slug)
     {
         $about = About::where('slug', $slug)->first();
-        
+        $description_sentences = preg_split('/[.!?]+/', $about->description, -1, PREG_SPLIT_NO_EMPTY);
+
         if ($about) {
             return response()->json([
                 'id' => $about->id,
                 'title' => $about->title,
-                'description' => $about->description,
+                'description' => $description_sentences,
                 'slug' => $about->slug,
                 'seo_title' => $about->seo_title,
                 'seo_description' => $about->seo_description,
