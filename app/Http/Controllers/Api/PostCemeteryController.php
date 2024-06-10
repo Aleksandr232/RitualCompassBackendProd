@@ -166,17 +166,13 @@ class PostCemeteryController extends Controller
         }
 
         $coordinates = explode(',', $cemetery->coordinates);
-        $description_sentences = explode('.', $cemetery->description);
+        $description_sentences = preg_split('/[.!?]+/', $cemetery->description, -1, PREG_SPLIT_NO_EMPTY);
 
-        $description_array = [];
-        foreach ($description_sentences as $sentence) {
-            $description_array[] = trim($sentence) . '.';
-        }
 
         $data = [
             'id' => $cemetery->id,
             'title' => $cemetery->title,
-            'description' => $description_array,
+            'description' => $description_sentences,
             'slug' => $cemetery->slug,
             'files' => $cemetery->files,
             'paths' => 'https://cz19567.tw1.ru/ritual/' . $cemetery->paths,
