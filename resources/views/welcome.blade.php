@@ -161,22 +161,22 @@
 
             const urlParams = new URLSearchParams(window.location.search);
 
-            // Отправляем GET-запрос на обработку callback-URL
-            fetch(`/api/auth/callback_apple?code=${urlParams.get('code')}&state=${urlParams.get('state')}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Обрабатываем ответ от сервера
-                console.log('Пользователь авторизован:', data.user);
-                console.log('Токен доступа:', data.token);
-            })
-            .catch(error => {
-                console.error('Ошибка при обработке callback-URL:', error);
-            });
+        // Отправляем GET-запрос на обработку callback-URL
+        fetch(`https://cz19567.tw1.ru/api/auth/callback_apple?code=${urlParams.get('code')}&state=${urlParams.get('state')}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Обрабатываем ответ от сервера
+            console.log('Пользователь авторизован:', data.user);
+            console.log('Токен доступа:', data.token);
+        })
+        .catch(error => {
+            console.error('Ошибка при обработке callback-URL:', error);
+        });
         </script>
     </body>
 </html>
