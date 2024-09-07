@@ -231,7 +231,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function handleAuthCallbackApple(): JsonResponse
+    public function handleAuthCallbackApple(Request $request): JsonResponse
     {
         try {
             $socialiteUser = Socialite::driver('apple')->stateless()->user();
