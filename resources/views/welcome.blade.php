@@ -115,6 +115,7 @@
                                 </p>
                             </div>
                         </div>
+                        <a id='apple' href="">войти apple</a>
                     </div>
                 </div>
 
@@ -136,5 +137,51 @@
                 </div>
             </div>
         </div>
+        <script>
+            fetch('https://cz19567.tw1.ru/api/auth/apple')
+            .then(response => response.json())
+            .then(data => {
+                // Получаем URL для авторизации через Apple
+                const appleAuthUrl = data.url;
+
+                // Создаем ссылку с полученным URL
+                const appleAuthLink = document.getElementById('apple');
+                appleAuthLink.href = appleAuthUrl;
+                appleAuthLink.target = '_blank'; // Открываем ссылку в новом окне
+
+                // Добавляем ссылку на страницу
+                document.body.appendChild(appleAuthLink);
+
+                // Кликаем по ссылке, чтобы начать процесс авторизации
+                appleAuthLink.click();
+            })
+            .catch(error => {
+                console.error('Ошибка при получении URL для авторизации через Apple:', error);
+            });
+
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Отправляем POST-запрос на обработку callback-URL
+            fetch('https://cz19567.tw1.ru/api/auth/callback_apple', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                // Передаем любые необходимые параметры, полученные из URL
+                code: urlParams.get('code'),
+                state: urlParams.get('state')
+            })
+            })
+            .then(response => response.json())
+            .then(data => {
+            // Обрабатываем ответ от сервера
+            console.log('Пользователь авторизован:', data.user);
+            console.log('Токен доступа:', data.token);
+            })
+            .catch(error => {
+            console.error('Ошибка при обработке callback-URL:', error);
+            });
+        </script>
     </body>
 </html>
