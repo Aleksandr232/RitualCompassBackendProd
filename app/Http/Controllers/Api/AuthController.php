@@ -243,7 +243,7 @@ class AuthController extends Controller
             ['email' => $socialiteUser->getEmail()],
             [
                 /* 'email_verified_at' => now(), */
-                'name' => $socialiteUser->getName(),
+                /* 'name' => $socialiteUser->getName(), */
                 /* 'apple_id' => $socialiteUser->getId(),
                 'avatar' => $socialiteUser->getAvatar(), */
             ]
