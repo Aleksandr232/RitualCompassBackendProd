@@ -162,16 +162,16 @@
             const urlParams = new URLSearchParams(window.location.search);
 
             // Отправляем POST-запрос на обработку callback-URL
-            fetch('https://cz19567.tw1.ru/api/auth/callback_apple', {
+            fetch('api/auth/callback_apple', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                // Передаем любые необходимые параметры, полученные из URL
+            // Передаем любые необходимые параметры, полученные из URL
+            params: {
                 code: urlParams.get('code'),
                 state: urlParams.get('state')
-            })
+            }
             })
             .then(response => response.json())
             .then(data => {
