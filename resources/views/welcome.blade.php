@@ -162,7 +162,7 @@
             const urlParams = new URLSearchParams(window.location.search);
 
             // Отправляем GET-запрос на обработку callback-URL
-            fetch('api/auth/callback_apple?code=' + urlParams.get('code') + '&state=' + urlParams.get('state'), {
+            fetch('/auth/callback_apple?code=' + urlParams.get('code') + '&state=' + urlParams.get('state'), {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
