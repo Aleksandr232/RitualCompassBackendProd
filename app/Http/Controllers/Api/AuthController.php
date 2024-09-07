@@ -223,9 +223,9 @@ class AuthController extends Controller
 
     public function redirectToAuthApple(): JsonResponse
     {
-
+        // Проверяем, если пользователь уже авторизован
         if (auth()->check()) {
-
+            // Если пользователь авторизован, возвращаем токен
             $userToken = auth()->user()->createToken('apple-token')->plainTextToken;
             return response()->json([
                 'user' => auth()->user(),
@@ -234,7 +234,7 @@ class AuthController extends Controller
             ]);
         }
 
-
+        // Если пользователь не авторизован, перенаправляем на авторизацию через Apple
         return response()->json([
             'url' => Socialite::driver('apple')
                 ->stateless()
@@ -262,8 +262,7 @@ class AuthController extends Controller
         );
 
         $userToken = $user->createToken('apple-token')->plainTextToken;
-        $user->remember_token = $userToken;
-        $user->save();
+        auth()->login($user);
 
         return response()->json([
             'user' => $user,
