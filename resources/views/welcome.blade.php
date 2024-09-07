@@ -161,26 +161,21 @@
 
             const urlParams = new URLSearchParams(window.location.search);
 
-            // Отправляем POST-запрос на обработку callback-URL
-            fetch('api/auth/callback_apple', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            // Передаем любые необходимые параметры, полученные из URL
-            params: {
-                code: urlParams.get('code'),
-                state: urlParams.get('state')
-            }
+            // Отправляем GET-запрос на обработку callback-URL
+            fetch('api/auth/callback_apple?code=' + urlParams.get('code') + '&state=' + urlParams.get('state'), {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
             .then(response => response.json())
             .then(data => {
-            // Обрабатываем ответ от сервера
-            console.log('Пользователь авторизован:', data.user);
-            console.log('Токен доступа:', data.token);
+                // Обрабатываем ответ от сервера
+                console.log('Пользователь авторизован:', data.user);
+                console.log('Токен доступа:', data.token);
             })
             .catch(error => {
-            console.error('Ошибка при обработке callback-URL:', error);
+                console.error('Ошибка при обработке callback-URL:', error);
             });
         </script>
     </body>
