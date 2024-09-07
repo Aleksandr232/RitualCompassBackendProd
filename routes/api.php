@@ -27,7 +27,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/auth', [AuthController::class, 'redirectToAuth']);
 Route::get('/auth/callback', [AuthController::class, 'handleAuthCallback']);
 Route::get('/auth/apple', [AuthController::class, 'redirectToAuthApple']);
-Route::get('/auth/callback_apple', [AuthController::class, 'handleAuthCallbackApple']);
+Route::post('/auth/callback_apple', [AuthController::class, 'handleAuthCallbackApple']);
 
 Route::middleware('auth:sanctum')->group(function(){
         Route::middleware('admin')->group(function(){
