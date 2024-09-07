@@ -220,4 +220,43 @@ class AuthController extends Controller
         }
 
     }
+
+    public function redirectToAuthApple(): JsonResponse
+    {
+        return response()->json([
+            'url' => Socialite::driver('apple')
+                ->stateless()
+                ->redirect()
+                ->getTargetUrl(),
+        ]);
+    }
+
+    public function handleAuthCallbackApple(): JsonResponse
+    {
+        try {
+            $socialiteUser = Socialite::driver('apple')->stateless()->user();
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Invalid credentials provided.'], 422);
+        }
+
+        $user = User::firstOrCreate(
+            ['email' => $socialiteUser->getEmail()],
+            [
+                'email_verified_at' => now(),
+                'name' => $socialiteUser->getName(),
+                'apple_id' => $socialiteUser->getId(),
+                'avatar' => $socialiteUser->getAvatar(),
+            ]
+        );
+
+        $userToken = $user->createToken('apple-token')->plainTextToken;
+        $user->remember_token = $userToken;
+        $user->save();
+
+        return response()->json([
+            'user' => $user,
+            'token' => $userToken,
+            'token_type' => 'Bearer',
+        ]);
+    }
 }
