@@ -242,10 +242,10 @@ class AuthController extends Controller
         $user = User::firstOrCreate(
             ['email' => $socialiteUser->getEmail()],
             [
-                'email_verified_at' => now(),
+                /* 'email_verified_at' => now(), */
                 'name' => $socialiteUser->getName(),
-                'apple_id' => $socialiteUser->getId(),
-                'avatar' => $socialiteUser->getAvatar(),
+                /* 'apple_id' => $socialiteUser->getId(),
+                'avatar' => $socialiteUser->getAvatar(), */
             ]
         );
 
