@@ -223,6 +223,18 @@ class AuthController extends Controller
 
     public function redirectToAuthApple(): JsonResponse
     {
+
+        if (auth()->check()) {
+
+            $userToken = auth()->user()->createToken('apple-token')->plainTextToken;
+            return response()->json([
+                'user' => auth()->user(),
+                'token' => $userToken,
+                'token_type' => 'Bearer',
+            ]);
+        }
+
+
         return response()->json([
             'url' => Socialite::driver('apple')
                 ->stateless()
@@ -242,10 +254,10 @@ class AuthController extends Controller
         $user = User::firstOrCreate(
             ['email' => $socialiteUser->getEmail()],
             [
-                /* 'email_verified_at' => now(), */
-                /* 'name' => $socialiteUser->getName(), */
-                /* 'apple_id' => $socialiteUser->getId(),
-                'avatar' => $socialiteUser->getAvatar(), */
+                'email_verified_at' => now(),
+                'name' => $socialiteUser->getName(),
+                'apple_id' => $socialiteUser->getId(),
+                'avatar' => $socialiteUser->getAvatar(),
             ]
         );
 
