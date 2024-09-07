@@ -161,7 +161,7 @@
 
             const urlParams = new URLSearchParams(window.location.search);
 
-        // Отправляем GET-запрос на обработку callback-URL
+// Отправляем GET-запрос на обработку callback-URL
         fetch(`https://cz19567.tw1.ru/api/auth/callback_apple?code=${urlParams.get('code')}&state=${urlParams.get('state')}`, {
             method: 'GET',
             headers: {
