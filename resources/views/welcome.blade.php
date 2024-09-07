@@ -163,7 +163,7 @@
 
             // Отправляем POST-запрос на обработку callback-URL
             fetch('https://cz19567.tw1.ru/api/auth/callback_apple', {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
