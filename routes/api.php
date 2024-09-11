@@ -25,7 +25,7 @@ use App\Http\Controllers\Api\PostMorgueController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/auth', [AuthController::class, 'redirectToAuth']);
-Route::post('/auth/callback', [AuthController::class, 'handleAuthCallback']);
+Route::get('/auth/callback', [AuthController::class, 'handleAuthCallback']);
 Route::get('/auth/apple', [AuthController::class, 'redirectToAuthApple']);
 Route::post('/auth/callback_apple', [AuthController::class, 'handleAuthCallbackApple']);
 
