@@ -89,7 +89,6 @@ class PostBlogController extends Controller
  *                 @OA\Property(property="seo_title", type="string",  example="Ритуальная помощь"),
  *                 @OA\Property(property="seo_description", type="string", example="Бесплатная помощь в организации похорон в Казани"),
  *                 @OA\Property(property="seo_keywords", type="string", example="Ритуальные услуги,Организация похорон в Казани,Похороны,Памятники"),
- *
  *              )
  *         )
  *     )
