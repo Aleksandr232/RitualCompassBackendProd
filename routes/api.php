@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\StatisticController;
 use App\Http\Controllers\Api\AboutController;
 use App\Http\Controllers\Api\PostCemeteryController;
 use App\Http\Controllers\Api\PostMorgueController;
+use App\Http\Controllers\Api\PostBlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +27,8 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/auth', [AuthController::class, 'redirectToAuth']);
 Route::get('/auth/callback', [AuthController::class, 'handleAuthCallback']);
-Route::get('/auth/apple', [AuthController::class, 'redirectToAuthApple']);
-Route::post('/auth/callback_apple', [AuthController::class, 'handleAuthCallbackApple']);
+/* Route::get('/auth/apple', [AuthController::class, 'redirectToAuthApple']);
+Route::post('/auth/callback_apple', [AuthController::class, 'handleAuthCallbackApple']); */
 
 Route::middleware('auth:sanctum')->group(function(){
         Route::middleware('admin')->group(function(){
@@ -45,6 +46,8 @@ Route::middleware('auth:sanctum')->group(function(){
             Route::get('/cemetery', [PostCemeteryController::class, 'get_cemetery']);
             Route::post('/morgue', [PostMorgueController::class, 'post_morgue']);
             Route::get('/morgue', [PostMorgueController::class, 'get_morgue']);
+            Route::post('/blog', [PostBlogController::class, 'post_blog']);
+            Route::get('/blog', [PostBlogController::class, 'get_blog']);
         });
 });
 
@@ -60,6 +63,7 @@ Route::get('/about/{slug}', [AboutController::class, 'get_about_slug']);
 Route::get('/cemetery', [PostCemeteryController::class, 'get_cemetery']);
 Route::get('/cemetery/{slug}', [PostCemeteryController::class, 'get_cemetery_slug']);
 Route::get('/morgue/{slug}', [PostMorgueController::class, 'get_morgue_slug']);
+Route::get('/blog', [PostBlogController::class, 'get_blog']);
 Route::middleware('api-session')->group(function () {
     Route::post('/rating/{id}', [RatingController::class, 'post_rate']);
 });
