@@ -53,15 +53,10 @@ class PostBlogController extends Controller
  */
 
    public function post_blog(Request $request){
-    $description = explode('.', $request->description);
-        $description = array_map(function($item) {
-            return trim($item) . '.';
-        }, $description);
-        $description = implode("\n", $description);
 
     $blog = new Blog([
         'title' => $request -> title,
-        'description' =>$description,
+        'description' =>$request ->description,
         'seo_title' => $request -> seo_title,
         'seo_description' => $request -> seo_description,
         'seo_keywords' => $request -> seo_keywords
@@ -99,11 +94,10 @@ class PostBlogController extends Controller
     $blog = Blog::all();
     $data = [];
     foreach ($blog as $about) {
-        $description_sentences = preg_split('/[.!?]+/', $about->description, -1, PREG_SPLIT_NO_EMPTY);
         $data[] = [
         'id' => $about -> id,
         'title' => $about -> title,
-        'description' => $description_sentences,
+        'description' => $about-> description,
         'seo_title' => $about -> seo_title,
         'seo_description' => $about -> seo_description,
         'seo_keywords' => $about -> seo_keywords
