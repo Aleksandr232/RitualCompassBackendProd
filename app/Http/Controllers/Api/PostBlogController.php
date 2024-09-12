@@ -75,7 +75,7 @@ class PostBlogController extends Controller
 
      /**
  * @OA\Get(
- *     path="/api/about",
+ *     path="/api/blog",
  *     tags={"Главная страница"},
  *     @OA\Response(
  *         response=200,
